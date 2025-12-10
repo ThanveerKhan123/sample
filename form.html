@@ -1,0 +1,98 @@
+<html>
+<head>
+    <title>Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        form {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
+            width: 300px;
+        }
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin-top: 3px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            outline: none;
+            transition: 0.3s;
+        }
+        input[type="text"]:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0,123,255,0.5);
+        }
+        span {
+            color: red;
+            font-size: 14px;
+        }
+        input[type="submit"] {
+            background: #007bff;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+        input[type="submit"]:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <form onsubmit="return validateForm()">
+        <label>Name</label>
+        <input type="text" id="name" placeholder="Enter Name">
+        <span id="nameError"></span><br>
+
+        <label>Email</label>
+        <input type="text" id="email" placeholder="Enter Email">
+        <span id="emailError"></span><br>
+
+        <input type="submit" value="Submit">
+    </form>
+
+    <script>
+        function validateForm(){
+            var name = document.getElementById('name').value;
+            var email = document.getElementById('email').value;
+
+            document.getElementById('nameError').innerHTML = '';
+            document.getElementById('emailError').innerHTML = '';
+
+            if(name === ''){
+                document.getElementById('nameError').innerHTML = 'Name is required';
+                return false;
+            }
+
+            var emailRegex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
+            if(email === ''){
+                document.getElementById('emailError').innerHTML = 'Email is required';
+                return false;
+            } else if(!emailRegex.test(email)){
+                document.getElementById('emailError').innerHTML = 'Invalid email format';
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+</body>
+</html>
